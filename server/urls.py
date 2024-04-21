@@ -17,11 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,re_path
 from . import views
+from rest_framework import permissions
+from drf_spectacular.views import SpectacularAPIView,SpectacularSwaggerView
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('login',views.login),
-    re_path('register',views.register),
-    re_path('profile',views.profile)
+    re_path('login/',views.login),
+    re_path('register/',views.register),
+    re_path('profile/',views.profile),
+    path('docs/',SpectacularAPIView.as_view(),name='schema'),
+    path('docs/docs_ui/',SpectacularSwaggerView.as_view(url_name='schema'))
+    
 ]
 

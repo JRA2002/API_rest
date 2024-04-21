@@ -9,8 +9,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import authentication_classes,permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from drf_spectacular.utils  import extend_schema
 
 @api_view(['POST'])
+@extend_schema(responses=UserSerializer)
 def login(request):
     
     print(request.data)
@@ -27,6 +29,7 @@ def login(request):
     
 
 @api_view(['POST'])
+@extend_schema(responses=UserSerializer)
 def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
@@ -43,6 +46,7 @@ def register(request):
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
+@extend_schema(responses=UserSerializer)
 def profile(request):
     
     print(request.user)

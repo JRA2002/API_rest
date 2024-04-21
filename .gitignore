@@ -1,2 +1,5 @@
 venv
 db.sqlite3
+schema.yml
+.vscode
+**__pycache__/
